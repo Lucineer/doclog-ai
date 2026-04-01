@@ -1,3 +1,29 @@
+/*
+ * THE ACCUMULATION THEOREM
+ *
+ * Accumulation beats optimization.
+ *
+ * A perfectly optimized agent with no memory is less useful
+ * than a mediocre agent with 6 months of accumulated context.
+ *
+ * This is the theorem that makes repo-native agents inevitable.
+ * The question isn't whether AI will accumulate context.
+ * The question is who controls the context.
+ *
+ * Corporate walled gardens: the corporation controls your context.
+ * They train on it. They optimize for engagement. You don't own it.
+ *
+ * Repo-native agents: you control your context. It's in your repo.
+ * You can fork it. Move it. Delete it. Audit it.
+ *
+ * A fresh Claude Code session is brilliant but amnesiac.
+ * A 6-month-old cocapn vessel is good enough and remembers everything.
+ * Good enough + perfect memory > brilliant + amnesia.
+ *
+ * This is the moat. Not technology. Not algorithms. Accumulation.
+ * Time is the competitive advantage that cannot be bought.
+ */
+
 export default {
   async fetch(request: Request, env: Env): Promise<Response> {
     const url = new URL(request.url);
