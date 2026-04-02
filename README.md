@@ -19,3 +19,7 @@ Every endpoint, every ADR, every breaking change is accumulated in the repo. A n
 3. Deploy to Cloudflare Workers
 
 Author: Superinstance
+
+## License
+
+MIT — Built with ❤️ by [Superinstance](https://github.com/superinstance) & [Lucineer](https://github.com/Lucineer) (DiGennaro et al.)
