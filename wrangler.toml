@@ -1,8 +1,9 @@
 name = "doclog-ai"
+account_id = "049ff5e84ecf636b53b162cbb580aae6"
 main = "src/worker.ts"
 compatibility_date = "2024-01-01"
 [[kv_namespaces]]
 binding = "DOCLOG_KV"
-id = "doclog-kv-placeholder"
+id = "958ab5fefd834016950da2ee35c29906"
 [vars]
-DEEPSEEK_API_KEY = ""
+# DEEPSEEK_API_KEY set in Secrets Store

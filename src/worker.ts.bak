@@ -32,7 +32,6 @@ export default {
 
     if (url.pathname === '/') return new Response(landing(), { headers: { 'Content-Type': 'text/html' } });
     if (url.pathname === '/app') return new Response(app(), { headers: { 'Content-Type': 'text/html' } });
-    if (url.pathname === '/health') return new Response(JSON.stringify({ status: 'ok', vessel: 'doclog-ai' }), { headers: h });
 
     // Chat SSE
     if (url.pathname === '/api/chat' && request.method === 'POST') {
@@ -106,9 +105,7 @@ p{font-size:1.1rem;max-width:600px;line-height:1.6;color:#94A3B8}
 .features{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:2rem;padding:4rem 2rem;max-width:1000px;margin:0 auto}
 .card{background:#1E293B;padding:2rem;border-radius:16px}
 .card h3{color:#3B82F6;margin-top:0}
-</style></head><body><div class="hero"><div>
-      <img src="https://cocapn-logos.casey-digennaro.workers.dev/img/cocapn-logo-v1.png" alt="Cocapn" style="width:64px;height:auto;margin-bottom:.5rem;border-radius:8px;display:block;margin-left:auto;margin-right:auto">
-      <h1>📋 DocLog</h1><p>Living documentation that watches your codebase evolve. After 6 months, this repo knows your API better than any new hire.</p><a href="/app" class="btn">Open Docs</a></div></div>
+</style></head><body><div class="hero"><div><h1>📋 DocLog</h1><p>Living documentation that watches your codebase evolve. After 6 months, this repo knows your API better than any new hire.</p><a href="/app" class="btn">Open Docs</a></div></div>
 <div class="features"><div class="card"><h3>📡 Endpoints</h3><p>Every API endpoint catalogued with auth, schemas, deprecation status.</p></div><div class="card"><h3>🏛️ ADRs</h3><p>Architecture Decision Records with full context and consequences.</p></div><div class="card"><h3>📝 Changelogs</h3><p>Auto-generated per version with breaking changes and features.</p></div></div></body></html>`;
 }
 
