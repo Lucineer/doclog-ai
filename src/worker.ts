@@ -33,6 +33,7 @@ export default {
     if (url.pathname === '/') return new Response(landing(), { headers: { 'Content-Type': 'text/html' } });
     if (url.pathname === '/app') return new Response(app(), { headers: { 'Content-Type': 'text/html' } });
     if (url.pathname === '/health') return new Response(JSON.stringify({ status: 'ok', vessel: 'doclog-ai' }), { headers: h });
+        if (url.pathname === '/vessel.json') { try { const vj = await import('./vessel.json', { with: { type: 'json' } }); return new Response(JSON.stringify(vj.default || vj), { headers: { 'Content-Type': 'application/json' } }); } catch { return new Response('{}', { headers: { 'Content-Type': 'application/json' } }); } }
 
     // Chat SSE
     if (url.pathname === '/api/chat' && request.method === 'POST') {

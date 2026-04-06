@@ -1,0 +1,14 @@
+{
+  "name": "doclog-ai",
+  "displayName": "Doclog",
+  "version": "1.0.0",
+  "type": "cocapn-vessel",
+  "category": "lifestyle",
+  "description": "AI-powered Doclog companion",
+  "icon": "ship",
+  "endpoints": ["/", "/health", "/vessel.json"],
+  "deployment": {
+    "platform": "cloudflare-workers",
+    "url": "https://doclog-ai.casey-digennaro.workers.dev"
+  }
+}
