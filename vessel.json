@@ -6,9 +6,17 @@
   "category": "lifestyle",
   "description": "AI-powered Doclog companion",
   "icon": "ship",
-  "endpoints": ["/", "/health", "/vessel.json"],
+  "endpoints": [
+    "/",
+    "/health",
+    "/vessel.json"
+  ],
   "deployment": {
     "platform": "cloudflare-workers",
     "url": "https://doclog-ai.casey-digennaro.workers.dev"
-  }
+  },
+  "capabilities": [
+    "document-management",
+    "knowledge-base"
+  ]
 }
