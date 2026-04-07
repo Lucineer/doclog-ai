@@ -4,7 +4,7 @@
 
 <h1 align="center">doclog-ai</h1>
 
-<p align="center">Documentation agent. Accumulated context IS the product.</p>
+<p align="center">A document assistant that retains conversation context across sessions.</p>
 
 <p align="center">
   <a href="#quick-start">Quick Start</a> ·
@@ -15,97 +15,80 @@
 
 ---
 
-**Live:** [doclog-ai](https://doclog-ai.casey-digennaro.workers.dev) · **Powered by [Capitaine](https://github.com/Lucineer/capitaine) · [Cocapn](https://github.com/Lucineer/cocapn)**
+**Live Instance:** [doclog-ai.casey-digennaro.workers.dev](https://doclog-ai.casey-digennaro.workers.dev)  
+Powered by Capitaine · Cocapn Fleet Protocol
 
-The repo IS the agent. doclog-ai is a cocapn vessel — a self-improving repository that runs on Cloudflare Workers, thinks with LLMs, and coordinates with the fleet through git.
+---
+
+## Purpose
+
+doclog-ai is a self-hosted document assistant that maintains persistent context. Unlike transient chat interfaces, it accumulates conversation history and document interactions in your own storage.
+
+This approach allows the assistant to reference prior work and build understanding over time, rather than treating each interaction as isolated.
+
+## How it works
+
+This is a standalone Cloudflare Worker that you deploy yourself.
+- The complete source is in this repository
+- State is stored in Cloudflare KV
+- No external databases or hidden dependencies
+- Operates within the Cocapn fleet for cross-agent coordination
 
 ## Quick Start
 
-```bash
-# Fork and deploy
-gh repo fork Lucineer/doclog-ai --clone
-cd doclog-ai
-npx wrangler login
-echo "your-github-token" | npx wrangler secret put GITHUB_TOKEN
-echo "your-llm-key" | npx wrangler secret put DEEPSEEK_API_KEY
-npx wrangler deploy
-```
+1. Fork this repository
+2. Set Cloudflare secrets for your LLM and GitHub tokens:
+   ```bash
+   echo "your-llm-key" | npx wrangler secret put DEEPSEEK_API_KEY
+   echo "your-github-token" | npx wrangler secret put GITHUB_TOKEN
+   ```
+3. Deploy:
+   ```bash
+   npx wrangler deploy
+   ```
 
-That's it. The vessel is alive.
+Your instance will be available at your Worker URL.
 
 ## Features
 
-- **BYOK v2** — Zero keys in code. All API keys via Cloudflare Secrets Store.
-- **Multi-model** — DeepSeek, SiliconFlow, DeepInfra, Moonshot, z.ai, local models.
-- **Session memory** — Conversations persist and build context over time.
-- **PII safety** — Automatic detection and dehydration of sensitive data.
-- **Rate limiting** — Guest tokens per IP with configurable limits.
-- **Health checks** — Standard `/health` endpoint on all vessels.
-- **Fleet coordination** — CRP-39 protocol for trust, bonds, and events.
+- **Persistent context**: Conversations and document interactions are stored in KV
+- **Multi-model support**: Configured for DeepSeek by default, compatible with other providers
+- **Local operation**: Runs entirely on Cloudflare Workers
+- **Built-in rate limiting**: Per-IP request limits
+- **Health monitoring**: Standard `/health` endpoint
+- **Fleet protocol**: CRP-39 compliant for secure agent coordination
+
+## Limitations
+
+Context storage uses Cloudflare KV, which has a 25MB per-key limit. Very long conversations may require manual pruning or alternative storage.
 
 ## Architecture
 
-Single-file Cloudflare Worker. Zero runtime dependencies. Inline HTML serving.
-
-```
-src/
-  worker.ts      # The hull — serves users, runs heartbeats
-lib/
-  byok.ts        # Multi-model routing (BYOK v2)
-  ...
-```
+Single-file Worker with modular libraries:
+- `worker.ts`: Main request handler and UI server
+- `context.ts`: KV-based conversation management
+- `byok.ts`: Model provider abstraction
+- `transforms.ts`: Document processing utilities
 
 ## The Fleet
 
-doclog-ai is one of 40+ autonomous vessels in the Lucineer fleet. Each vessel is a different domain of one intelligence.
-
+doclog-ai is part of the Cocapn Fleet—a collection of specialized agents that can securely coordinate. Each vessel handles one domain and operates independently.
 
 <details>
-<summary><strong>⚓ The Fleet</strong></summary>
+<summary>Fleet Index</summary>
 
-**Flagship vessels**
-
-- [cocapn.ai](https://github.com/Lucineer/capitaine)
-- [personallog.ai](https://github.com/Lucineer/personallog-ai)
-- [businesslog.ai](https://github.com/Lucineer/businesslog-ai)
-- [studylog.ai](https://github.com/Lucineer/studylog-ai)
-- [makerlog.ai](https://github.com/Lucineer/makerlog-ai)
-- [playerlog.ai](https://github.com/Lucineer/playerlog-ai)
-- [dmlog.ai](https://github.com/Lucineer/dmlog-ai)
-- [reallog.ai](https://github.com/Lucineer/reallog-ai)
-- [deckboss.ai](https://github.com/Lucineer/deckboss-ai)
-
-**Fleet services**
-
-- [Fleet Catalog](https://github.com/Lucineer/capitaine/blob/master/docs/fleet/FLEET.md)
-- [Git Agent (full)](https://github.com/Lucineer/git-agent)
-- [Cocapn Lite (minimal)](https://github.com/Lucineer/cocapn-lite)
-- [Fleet Orchestrator](https://github.com/Lucineer/fleet-orchestrator)
-- [Dead Reckoning Engine](https://github.com/Lucineer/dead-reckoning-engine)
-- [Dream Engine](https://github.com/Lucineer/dream-engine)
-- [Seed UI (5 layers)](https://github.com/Lucineer/seed-ui)
-
-**For power users**
-
-- [Cocapn Lite (tabula rasa)](https://github.com/Lucineer/cocapn-lite)
-- [Cocapn (core platform)](https://github.com/Lucineer/cocapn)
-- [ZeroClaw (framework)](https://github.com/Lucineer/zeroclaw)
-
-[View all 106 repos →](https://github.com/orgs/Lucineer/repositories)
-[Fleet manifest →](https://github.com/Lucineer/capitaine/blob/master/docs/fleet/FLEET.md)
-
+**Core Vessels**
+- [cocapn.ai](https://github.com/Lucineer/capitaine) - Fleet coordination
+- [personallog.ai](https://github.com/Lucineer/personallog-ai) - Personal journaling
 </details>
 
+---
 
-## Philosophy
+<div align="center">
+  <a href="https://the-fleet.casey-digennaro.workers.dev">Fleet Status</a> · 
+  <a href="https://cocapn.ai">Cocapn Protocol</a>
+</div>
 
-> The repo is the agent. The agent is the repo. Intelligence crystallizes from fluid (LLM calls) to solid (code). The vessel becomes faster and cheaper as it becomes smarter.
-
-- **Fork-first** — Power users fork and customize. Casual users visit the domain.
-- **Pay-for-convenience** — We save you costs through bulk inference, not markups.
-- **Git as coordination** — Agents compete via PRs, not chat.
-- **Soft actualization** — Vessels evolve gently based on usage, not hard updates.
-
-## License
-
-MIT · Superinstance & Lucineer (DiGennaro et al.)
+<p align="center">
+  <sub>Attribution: Superinstance & Lucineer (DiGennaro et al.) · MIT Licensed</sub>
+</p>
