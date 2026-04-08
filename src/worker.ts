@@ -31,6 +31,7 @@ export default {
     if (request.method === 'OPTIONS') return new Response(null, { headers: { 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': '*', 'Access-Control-Allow-Headers': '*' } });
 
     if (url.pathname === '/') return new Response(landing(), { headers: { 'Content-Type': 'text/html', 'Content-Security-Policy': 'default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://*; frame-ancestors 'none';' } });
+    'X-Frame-Options': 'DENY',
     if (url.pathname === '/app') return new Response(app(), { headers: { 'Content-Type': 'text/html', 'Content-Security-Policy': 'default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://*; frame-ancestors 'none';' } });
     if (url.pathname === '/health') return new Response(JSON.stringify({ status: 'ok', vessel: 'doclog-ai' }), { headers: h });
         if (url.pathname === '/vessel.json') { try { const vj = await import('./vessel.json', { with: { type: 'json' } }); return new Response(JSON.stringify(vj.default || vj), { headers: { 'Content-Type': 'application/json' } }); } catch { return new Response('{}', { headers: { 'Content-Type': 'application/json' } }); } }
